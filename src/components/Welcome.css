@@ -1,0 +1,15 @@
+.friutes-header{
+    height:300px;
+    width:100%;
+    background-color: rgba(133, 112, 95, 0.7);
+    display:flex;
+    flex-direction: row;
+}
+.friut{
+    height:200px;
+    width:200px;
+    border-radius:100px;
+    background-color: rgba(185, 15, 252, 0.7);
+    margin: 30px;
+    
+}
