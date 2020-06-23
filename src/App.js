@@ -2,28 +2,89 @@ import React from 'react';
 import './App.css';
 import MyApp from './components/Welcome';
 
-function App() {
-  return (
-    <>
-      <div className="App friutes-header">
-        <MyApp name="Apple" image="/images/apple.jpg" />
-        <MyApp name="kiwi" image="/images/Kiwi.jpg" />
-        <MyApp name="Orange" image="/images/Orange.jpeg" />
-        <MyApp name="Strawberry" image="/images/strawberry.png" />
-        <MyApp name="Lemon" image="/images/Lemon.png" />
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = ({
+      friuts: [
+        {
+          id: 'f1',
+          name: 'Apple',
+          image: '/images/apple.jpg'
+        },
+        {
+          id: 'f2',
+          name: 'Kiwi',
+          image: '/images/Kiwi.jpg'
+        },
+        {
+          id: 'f3',
+          name: 'Orange',
+          image: '/images/Orange.jpeg'
+        },
+        {
+          id: 'f4',
+          name: 'Strawberry',
+          image: '/images/strawberry.png'
+        },
+        {
+          id: 'f5',
+          name: 'Lemon',
+          image: '/images/Lemon.png'
+        }
+      ],
+      vegitables: [
+        {
+          id: 'v1',
+          name: 'Tomato',
+          image: '/images/apple.jpg'
+        },
+        {
+          id: 'v2',
+          name: 'Carrots',
+          image: '/images/Kiwi.jpg'
+        },
+        {
+          id: 'v3',
+          name: 'Beans',
+          image: '/images/Orange.jpeg'
+        },
+        {
+          id: 'v4',
+          name: 'Potato',
+          image: '/images/strawberry.png'
+        },
+        {
+          id: 'v5',
+          name: 'Cucumber',
+          image: '/images/Lemon.png'
+        }
+      ]
 
-      </div>
-      <br></br>
-      <div className="App friutes-header">
-        <MyApp name="Tomato" image="/images/apple.jpg" />
-        <MyApp name="Carrots" image="/images/Kiwi.jpg" />
-        <MyApp name="Beans" image="/images/Orange.jpeg" />
-        <MyApp name="Potato" image="/images/strawberry.png" />
-        <MyApp name="Cucumber" image="/images/Lemon.png" />
 
+    })
+  }
+
+  render() {
+    return (
+      <>
+    <div className="App friutes-header">
+      
+          {this.state.friuts.map( friut =>
+            <MyApp name={friut.name} image={friut.image} id={friut.id} />
+          )}
+
+    </div>
+    <div className="App friutes-header">     
+          {this.state.vegitables.map( veggies  =>
+            <MyApp name={veggies.name} image={veggies.image} id={veggies.id} />
+          )}
+        
       </div>
-    </>
-  );
-}
+      </>
+      );
+    }
+  }
+
 
 export default App;

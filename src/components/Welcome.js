@@ -4,7 +4,7 @@ import './Welcome.css'
 function MyApp(props) {
      return (
      
-               <div >
+               <div>
                     <img src={props.image} alt={props.name} className="friut" />
                    <p className="p"> {props.name} </p>
                </div>

@@ -2,7 +2,7 @@
 
 
 .friutes-header{
-    height:300px;
+    height:200px;
     width:100%;
     background-color: rgba(225, 0, 255, 0.3);
    
@@ -10,11 +10,13 @@
     flex-direction: row;
 }
 .friut{
-    height:200px;
-    width:200px;
+    height:150px;
+    width:150px;
     border-radius:50%;
-    margin: 10px;
-    padding: 20px;
+    margin-right: 100px;
+    margin-left: 20px;
+    margin-top: 10px;
+    
     
     
 }
