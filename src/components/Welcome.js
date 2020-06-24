@@ -6,7 +6,7 @@ function MyApp(props) {
      
                <div>
                     <img src={props.image} alt={props.name} className="friut" />
-                   <p className="p"> {props.name} </p>
+                   <p className="p"> {props.name}  </p>
                </div>
               
 

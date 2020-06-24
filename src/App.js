@@ -31,8 +31,10 @@ class App extends React.Component {
           id: 'f5',
           name: 'Lemon',
           image: '/images/Lemon.png'
-        }
+        },
+
       ],
+
       vegitables: [
         {
           id: 'v1',
@@ -59,32 +61,43 @@ class App extends React.Component {
           name: 'Cucumber',
           image: '/images/Lemon.png'
         }
-      ]
+      ],
+      showFriuts: true,
 
 
     })
   }
+  handleButton() {
+    console.log("button clicked");
+
+    const showOrNot = this.state.showFriuts;
+    this.setState({ showFriuts: !showOrNot });
+  }
 
   render() {
     return (
+
       <>
-    <div className="App friutes-header">
-      
-          {this.state.friuts.map( friut =>
+        <button type="botton" onClick={() => this.handleButton()}>click me</button>
+        {this.state.showFriuts ? <div className="App friutes-header">
+
+          {this.state.friuts.map((friut, index) =>
             <MyApp name={friut.name} image={friut.image} id={friut.id} />
           )}
 
-    </div>
-    <div className="App friutes-header">     
-          {this.state.vegitables.map( veggies  =>
+        </div> : null}
+
+        <br></br>
+        <div className="App friutes-header">
+          {this.state.vegitables.map((veggies, index) =>
             <MyApp name={veggies.name} image={veggies.image} id={veggies.id} />
           )}
-        
-      </div>
+
+        </div>
       </>
-      );
-    }
+    );
   }
+}
 
 
 export default App;
