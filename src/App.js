@@ -39,27 +39,27 @@ class App extends React.Component {
         {
           id: 'v1',
           name: 'Tomato',
-          image: '/images/apple.jpg'
+          image: '/images/tomato.jpg'
         },
         {
           id: 'v2',
           name: 'Carrots',
-          image: '/images/Kiwi.jpg'
+          image: '/images/carrot.jpg'
         },
         {
           id: 'v3',
           name: 'Beans',
-          image: '/images/Orange.jpeg'
+          image: '/images/beans.jpg'
         },
         {
           id: 'v4',
           name: 'Potato',
-          image: '/images/strawberry.png'
+          image: '/images/potato.jpg'
         },
         {
           id: 'v5',
           name: 'Cucumber',
-          image: '/images/Lemon.png'
+          image: '/images/cucumber.jpg'
         }
       ],
       showFriuts: true,
