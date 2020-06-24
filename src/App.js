@@ -63,37 +63,40 @@ class App extends React.Component {
         }
       ],
       showFriuts: true,
+      showVegitables:true
 
 
     })
   }
-  handleButton() {
-    console.log("button clicked");
-
-    const showOrNot = this.state.showFriuts;
+  handleButtonF() {
+     const showOrNot = this.state.showFriuts;
     this.setState({ showFriuts: !showOrNot });
   }
+  handleButtonV() {
+    const showOrNot = this.state.showVegitables;
+   this.setState({ showVegitables: !showOrNot });
+ }
 
   render() {
     return (
 
       <>
-        <button type="botton" onClick={() => this.handleButton()}>click me</button>
-        {this.state.showFriuts ? <div className="App friutes-header">
-
+        <button className="Frbutton" onClick={() => this.handleButtonF()}>click for friuts</button>
+        {this.state.showFriuts ? 
+        <div className="App friutes-header">
           {this.state.friuts.map((friut, index) =>
-            <MyApp name={friut.name} image={friut.image} id={friut.id} />
-          )}
-
-        </div> : null}
+            <MyApp name={friut.name} image={friut.image} key={friut.id} />
+          )}</div> : null}
 
         <br></br>
-        <div className="App friutes-header">
+        <button className="Vgbutton" onClick={() => this.handleButtonV()}>click for vegitables</button>
+        {this.state.showVegitables ?<div className="App friutes-header">
           {this.state.vegitables.map((veggies, index) =>
-            <MyApp name={veggies.name} image={veggies.image} id={veggies.id} />
+            <MyApp name={veggies.name} image={veggies.image} key={veggies.id} />
           )}
 
-        </div>
+        </div> : null }
+        
       </>
     );
   }
