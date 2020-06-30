@@ -1,6 +1,8 @@
 import React from 'react';
 import './App.css';
 import MyApp from './components/Welcome';
+import axios from 'axios';
+import Comment from './components/Comments';
 
 class App extends React.Component {
   constructor(props) {
@@ -63,7 +65,8 @@ class App extends React.Component {
         }
       ],
       showFriuts: true,
-      showVegitables:true
+      showVegitables:true,
+      comments:[]
 
 
     })
@@ -76,26 +79,53 @@ class App extends React.Component {
     const showOrNot = this.state.showVegitables;
    this.setState({ showVegitables: !showOrNot });
  }
+ deleteHandler(friutIndex) {
+   const delFriut = this.state.friuts.slice();
+   delFriut.splice(friutIndex,2);
+   console.log("friut clicked", friutIndex);
+   this.setState({friuts: delFriut });
+ }
+ componentDidMount(){
+   axios.get("https://jsonplaceholder.typicode.com/comments")
+   .then((response) => {
+        console.log("api response" ,response);
+        this.setState({comments:response.data});
+   });
+ }
 
-  render() {
+
+  render()
+   { 
+     
+       const listofComments = this.state.comments.map((p) => {
+         return(
+         
+            <Comment name = {p.name} email ={p.email}/>
+           
+            )
+       });
+
     return (
 
       <>
-        <button className="Frbutton" onClick={() => this.handleButtonF()}>click for friuts</button>
+        <button className="button" onClick={() => this.handleButtonF()}>click for friuts</button>
         {this.state.showFriuts ? 
         <div className="App friutes-header">
           {this.state.friuts.map((friut, index) =>
-            <MyApp name={friut.name} image={friut.image} key={friut.id} />
+            <MyApp name={friut.name} image={friut.image} key={friut.id} click={()=>this.deleteHandler(index)} />
           )}</div> : null}
 
         <br></br>
-        <button className="Vgbutton" onClick={() => this.handleButtonV()}>click for vegitables</button>
+        <button className="button" onClick={() => this.handleButtonV()}>click for vegitables</button>
         {this.state.showVegitables ?<div className="App friutes-header">
           {this.state.vegitables.map((veggies, index) =>
             <MyApp name={veggies.name} image={veggies.image} key={veggies.id} />
           )}
 
         </div> : null }
+        <div className="App-comments">
+        {listofComments}
+        </div>
         
       </>
     );

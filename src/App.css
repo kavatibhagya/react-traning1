@@ -36,7 +36,7 @@
     transform: rotate(360deg);
   }
 }
-.Frbutton{
+.button{
   display: inline-block;
   background-color: rgba(252, 0, 0, 0.6);
   border:none;
@@ -47,13 +47,9 @@
   border-radius: 5px;
  
 }
-.Vgbutton{
-  display: inline-block;
-  background-color: rgba(252, 0, 0, 0.6);
-  border:none;
-  outline: none;
-  margin:20px;
-  color:#fff;
-  font-size: 18px;
-  border-radius: 5px;
+.App-comments{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  
 }

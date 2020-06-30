@@ -5,8 +5,8 @@ function MyApp(props) {
      return (
      
                <div>
-                    <img src={props.image} alt={props.name} className="friut" />
-                   <p className="p"> {props.name}  </p>
+                    <img onClick={props.click} src={props.image} alt={props.name} className="friut" />
+                   <p className="p"> {props.name}</p>
                </div>
               
 
