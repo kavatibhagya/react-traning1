@@ -4,8 +4,9 @@ import './Comments.css'
   function Comment(props) {
         return (
             <div className="comments">
-                <h1>{props.name}</h1>
-                <p className="email">{props.email}</p>
+                <h1>Name: {props.name}</h1>
+                <p className="email">Email: {props.email}</p>
+                <p className="email">Author:{props.author}</p>
             </div>
         )
     }
