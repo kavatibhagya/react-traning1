@@ -3,6 +3,7 @@ import './App.css';
 import MyApp from './components/Welcome';
 import axios from 'axios';
 import Comment from './components/Comments';
+import Error from './components/Error';
 
 class App extends React.Component {
   constructor(props) {
@@ -68,7 +69,8 @@ class App extends React.Component {
       showVegitables: true,
       comments: [],
       firstname:'',
-      lastname:''
+      lastname:'',
+      errorState:false
 
 
     })
@@ -115,9 +117,13 @@ class App extends React.Component {
       lastName:this.state.lastname
 
     }
-    axios.post("https://jsonplaceholder.typicode.com/comments",userData)
+    axios.post("https://jsonplaceholder.typicode12.com/comments",userData)
     .then(response =>{
       console.log("res", response.data);
+    })
+    .catch((error)=>{
+      console.log("ERROR:::",error);
+      this.setState({errorState :true});
     })
   }
 
@@ -153,9 +159,10 @@ class App extends React.Component {
         </div> : null}
 
        
-          <input type="text"  onChange={(event) => this.setState({firstname:event.target.value})}/>
-          <input type="text" onChange={(event) => this.setState({lastname:event.target.value})}/>
+          <input type="text"  onChange={(event) => this.setState({firstname:event.target.value})}/><br></br>
+          <input type="text" onChange={(event) => this.setState({lastname:event.target.value})}/><br></br>
           <button onClick={() =>this.handlePostCalls()}>signup</button>
+          {this.state.errorState ? <Error/>:null}
          
         <div className="App-comments">
           {listofComments}
