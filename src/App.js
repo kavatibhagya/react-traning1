@@ -1,177 +1,92 @@
 import React from 'react';
 import './App.css';
-import MyApp from './components/Welcome';
-import axios from 'axios';
-import Comment from './components/Comments';
-import Error from './components/Error';
+
+ function Validatemessage(props){
+   if(!props.valid){
+     return (
+       <div style={{color:'red'}}>{props.message}</div>
+     );
+   }
+   return null;
+ }
+
+
+
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = ({
-      friuts: [
-        {
-          id: 'f1',
-          name: 'Apple',
-          image: '/images/apple.jpg'
-        },
-        {
-          id: 'f2',
-          name: 'Kiwi',
-          image: '/images/Kiwi.jpg'
-        },
-        {
-          id: 'f3',
-          name: 'Orange',
-          image: '/images/Orange.jpeg'
-        },
-        {
-          id: 'f4',
-          name: 'Strawberry',
-          image: '/images/strawberry.png'
-        },
-        {
-          id: 'f5',
-          name: 'Lemon',
-          image: '/images/Lemon.png'
-        },
-
-      ],
-
-      vegitables: [
-        {
-          id: 'v1',
-          name: 'Tomato',
-          image: '/images/tomato.jpg'
-        },
-        {
-          id: 'v2',
-          name: 'Carrots',
-          image: '/images/carrot.jpg'
-        },
-        {
-          id: 'v3',
-          name: 'Beans',
-          image: '/images/beans.jpg'
-        },
-        {
-          id: 'v4',
-          name: 'Potato',
-          image: '/images/potato.jpg'
-        },
-        {
-          id: 'v5',
-          name: 'Cucumber',
-          image: '/images/cucumber.jpg'
-        }
-      ],
-      showFriuts: true,
-      showVegitables: true,
-      comments: [],
-      firstname:'',
-      lastname:'',
-      errorState:false
-
-
-    })
-  }
-  // handleButtonF() {
-  //   const showOrNot = this.state.showFriuts;
-  //   this.setState({ showFriuts: !showOrNot });
-  // }
-  // handleButtonV() {
-  //   const showOrNot = this.state.showVegitables;
-  //   this.setState({ showVegitables: !showOrNot });
-  // }
-  // deleteHandler(friutIndex) {
-  //   const delFriut = this.state.friuts.slice();
-  //   delFriut.splice(friutIndex, 2);
-  //   console.log("friut clicked", friutIndex);
-  //   this.setState({ friuts: delFriut });
-  // }
-  
-    
- 
-
-   
-
-  componentDidMount() {
-    axios.get("https://jsonplaceholder.typicode.com/comments")
-      .then((response) => {
-        console.log("api response", response);
-        const topRecords = response.data.slice(0, 10);
-        const updatedRecords = topRecords.map((comment) => {
-          return {
-            ...comment,
-            author: "Bhagi"
-
-          }
-        })
-        this.setState({ comments: updatedRecords });
-      });
-  }
-
-  handlePostCalls(){
-    const userData= {
-      firstName:this.state.firstname,
-      lastName:this.state.lastname
+    this.state = {
+      formValid:false,
+      userName: '',
+      usernameValid:true,
+      email:'',
+      emailValid: true
 
     }
-    axios.post("https://jsonplaceholder.typicode12.com/comments",userData)
-    .then(response =>{
-      console.log("res", response.data);
-    })
-    .catch((error)=>{
-      console.log("ERROR:::",error);
-      this.setState({errorState :true});
-    })
+  }
+   
+
+  updateUsername = (userName) => {
+    this.setState({userName} , this.validateuserName);
+  }
+  validateuserName =() => {
+    const {userName} = this.state; // objecet destructure
+    let usernameValid = true;
+    if(userName.length < 3){
+      usernameValid = false;
+    }
+    this.setState({usernameValid});
   }
 
-
-  render() {
-
-    const listofComments = this.state.comments.map((p) => {
-      return (
-
-        <>
-          <Comment name={p.name} email={p.email} author={p.author} />
-         
-        </>)
-    });
-
-    return (
-
-      <>
-        <button className="button" onClick={() => this.handleButtonF()}>click for friuts</button>
-        {this.state.showFriuts ?
-          <div className="App friutes-header">
-            {this.state.friuts.map((friut, index) =>
-              <MyApp name={friut.name} image={friut.image} key={friut.id} click={() => this.deleteHandler(index)} />
-            )}</div> : null}
-
-        <br></br>
-        <button className="button" onClick={() => this.handleButtonV()}>click for vegitables</button>
-        {this.state.showVegitables ? <div className="App friutes-header">
-          {this.state.vegitables.map((veggies, index) =>
-            <MyApp name={veggies.name} image={veggies.image} key={veggies.id} />
-          )}
-
-        </div> : null}
-
-       
-          <input type="text"  onChange={(event) => this.setState({firstname:event.target.value})}/><br></br>
-          <input type="text" onChange={(event) => this.setState({lastname:event.target.value})}/><br></br>
-          <button onClick={() =>this.handlePostCalls()}>signup</button>
-          {this.state.errorState ? <Error/>:null}
-         
-        <div className="App-comments">
-          {listofComments}
-         </div>
-
-      </>
-    );
+  updateEmail=(email) =>{
+    this.setState({email} , this.validateEmail);
   }
+  validateEmail=() =>{
+    const {email} =this.state;
+    let emailValid = true;
+    if(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+      emailValid = false;
+    }
+    this.setState({emailValid});
 }
 
+  render() {
+    return (
+      <div className="App">
+        <h1>form and it's validations</h1>
+        <form>
+          <div>
+            <label>Username:</label>
+            <input type="text" onChange={(event) => { this.updateUsername(event.target.value) }} />
+            <Validatemessage valid = {this.state.usernameValid} message ={ "username must be 3 characters"}/>
+          </div>
+          <div>
+            <label>Email :</label>   
+            <input type="text" onChange={(event) => { this.updateEmail(event.target.value) }} />
+            <Validatemessage valid = {this.state.emailValid} message ={ "emial must have @"}/>
+          </div>
+          <div>
+            <label>Password:</label>
+            <input type="password" onChange={(event) => { this.updatePassword(event.target.value) }} />
+          </div>
+          <div>
+            <label>Confirmpassword:</label>
+            <input type="password" onChange={(event) => { this.updatePassWord(event.target.value)}} />
+          </div>
+          <div>
+            <label>Age:</label>
+            <input type="number" onChange={(event) => { this.updateAge(event.target.value) }} />
+          </div>
+          <div>
+            <button disabled ={!this.state.formvalid}>submit</button>
+          </div>
 
-export default App;
+
+
+        </form>
+      </div>
+    )
+  }
+}
+  export default App;
